@@ -44,6 +44,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 9.90642, 0)
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Player.tscn")
 spawn_path = NodePath("../Players")
 spawn_limit = 4
 
