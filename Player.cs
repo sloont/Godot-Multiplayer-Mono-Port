@@ -17,7 +17,7 @@ public partial class Player : CharacterBody3D {
         }
         set {
             _player = value;
-            // input.SetMultiplayerAuthority(value);
+            input.SetMultiplayerAuthority(value);
         }
     }
 
