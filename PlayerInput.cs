@@ -10,6 +10,9 @@ public partial class PlayerInput : MultiplayerSynchronizer
 	public Vector2 direction = Vector2.Zero;
 
 	public override void _EnterTree() {
+		if (!(GetParent<Player>().player == Multiplayer.GetUniqueId())) {
+			return;
+		}
 		SetMultiplayerAuthority(Multiplayer.GetUniqueId());
 	}
 	// Called when the node enters the scene tree for the first time.

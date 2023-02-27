@@ -53,7 +53,7 @@ public partial class Level : Node3D {
 
 		GD.Print("SetMultiplayerAuthority", id);
 
-		// newPlayer.GetNode<PlayerInput>("PlayerInput").SetMultiplayerAuthority(id);
+		newPlayer.GetNode<PlayerInput>("PlayerInput").SetMultiplayerAuthority(id);
 
 		GD.Print($"Adding {id} to scene tree");
 		GetNode<Node3D>("Players").AddChild(newPlayer, true);
