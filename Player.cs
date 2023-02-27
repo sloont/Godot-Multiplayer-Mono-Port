@@ -9,19 +9,9 @@ public partial class Player : CharacterBody3D {
 
     public PlayerInput input;
 
-    private int _player;
+    private int _player = 1;
     [Export]
-    public int player {
-        get {
-            return _player;
-        }
-        set {
-            _player = value;
-            // input is the cause of the null reference exception
-            input.SetMultiplayerAuthority(_player);
-
-        }
-    }
+    public int player {get;set;}
 
     public override void _Ready() {
         input = GetNode<PlayerInput>("PlayerInput");

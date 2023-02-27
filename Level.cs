@@ -19,6 +19,7 @@ public partial class Level : Node3D {
 		Multiplayer.Connect(MultiplayerApi.SignalName.PeerDisconnected, new Callable(this, MethodName._DeletePlayer));
 
 		foreach(int id in Multiplayer.GetPeers()) {
+			GD.Print(id);
 			_AddPlayer(id);
 		}
 
@@ -37,10 +38,13 @@ public partial class Level : Node3D {
     }
 
 	private void _AddPlayer(int id) {
+		GD.Print("Calling _AddPlayer");
+
 		var playerScene = (PackedScene) ResourceLoader.Load("res://Player.tscn");
 		Player newPlayer = playerScene.Instantiate<Player>();
 
 		newPlayer.player = id;
+
 		Vector2 position = Vector2.FromAngle(rng.Randf() * 2 * (float) Math.PI);
 
 		newPlayer.Position = new Vector3(position.X * SPAWN_RANDOM * rng.Randf(), 0, position.Y * SPAWN_RANDOM * rng.Randf());
@@ -48,6 +52,7 @@ public partial class Level : Node3D {
 		newPlayer.Name = id.ToString();
 
 		GetNode<Node3D>("Players").AddChild(newPlayer, true);
+		GetNode<MultiplayerSynchronizer>($"Players/{newPlayer.Name}/PlayerInput").SetMultiplayerAuthority(id);
 	}
 
 	private void _DeletePlayer(int id) {
