@@ -8,14 +8,16 @@ public partial class Player : CharacterBody3D {
     public float gravity = (float) ProjectSettings.GetSetting("physics/3d/default_gravity");
 
     public PlayerInput input;
+
+    private int _player;
     [Export]
     public int player {
         get {
-            return player;
+            return _player;
         }
         set {
-            player = value;
-            input.SetMultiplayerAuthority(value);
+            _player = value;
+            // input.SetMultiplayerAuthority(value);
         }
     }
 

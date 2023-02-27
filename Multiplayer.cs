@@ -59,7 +59,7 @@ public partial class Multiplayer : Node {
         GetTree().Paused = false;
 
         if (Multiplayer.IsServer()) {
-            CallDeferred(MethodName._ChangeLevel, (PackedScene)ResourceLoader.Load("res://Level.tscn"));
+            CallDeferred(MethodName._ChangeLevel, ((PackedScene) ResourceLoader.Load("res://Level.tscn")));
         }
     }
 
