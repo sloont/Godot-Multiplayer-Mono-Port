@@ -17,7 +17,9 @@ public partial class Player : CharacterBody3D {
         }
         set {
             _player = value;
-            input.SetMultiplayerAuthority(value);
+            // input is the cause of the null reference exception
+            input.SetMultiplayerAuthority(_player);
+
         }
     }
 
