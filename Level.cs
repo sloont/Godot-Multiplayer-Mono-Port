@@ -51,8 +51,12 @@ public partial class Level : Node3D {
 
 		newPlayer.Name = id.ToString();
 
+		GD.Print("SetMultiplayerAuthority", id);
+
+		// newPlayer.GetNode<PlayerInput>("PlayerInput").SetMultiplayerAuthority(id);
+
+		GD.Print($"Adding {id} to scene tree");
 		GetNode<Node3D>("Players").AddChild(newPlayer, true);
-		GetNode<MultiplayerSynchronizer>($"Players/{newPlayer.Name}/PlayerInput").SetMultiplayerAuthority(id);
 	}
 
 	private void _DeletePlayer(int id) {

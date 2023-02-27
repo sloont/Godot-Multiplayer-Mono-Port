@@ -8,8 +8,16 @@ public partial class PlayerInput : MultiplayerSynchronizer
 	public bool jumping = false;
 	[Export]
 	public Vector2 direction = Vector2.Zero;
+
+	public override void _EnterTree() {
+		SetMultiplayerAuthority(Multiplayer.GetUniqueId());
+	}
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
+		GD.Print("GetMultiplayerAuthority: ", GetMultiplayerAuthority());
+		GD.Print("Multiplayer.GetUniqueId(): ", Multiplayer.GetUniqueId());
+
+
 		SetProcess(GetMultiplayerAuthority() == Multiplayer.GetUniqueId());
 	}
 
@@ -26,4 +34,10 @@ public partial class PlayerInput : MultiplayerSynchronizer
 	public void Jump() {
 		jumping = true;
 	}
+
+	// [Rpc(MultiplayerApi.RpcMode.Authority)]
+	// public void RemoteSetMultiplayerAuthority(int id) {
+	// 	SetMultiplayerAuthority(id);
+	// 	SetProcess(GetMultiplayerAuthority() == Multiplayer.GetUniqueId());
+	// }
 }

@@ -9,12 +9,22 @@ public partial class Player : CharacterBody3D {
 
     public PlayerInput input;
 
-    private int _player = 1;
+    private int _player;
     [Export]
-    public int player {get;set;}
+    public int player {
+        get {
+            return _player;
+        }
+        set {
+            _player = value;
+            input?.SetMultiplayerAuthority(_player);
+        }
+    }
 
     public override void _Ready() {
         input = GetNode<PlayerInput>("PlayerInput");
+
+        GD.Print("Player._Ready, _player = ", player);
 
         if (player == Multiplayer.GetUniqueId()) {
             GetNode<Camera3D>("Camera3D").Current = true;
