@@ -4,7 +4,6 @@ using System;
 public partial class Multiplayer : Node {
     private const int PORT = 4433;
     public ENetMultiplayerPeer network;
-    public MultiplayerApi multiplayerApi;
 
     public Control ui;
 

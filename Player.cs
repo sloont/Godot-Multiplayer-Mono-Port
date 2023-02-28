@@ -11,15 +11,7 @@ public partial class Player : CharacterBody3D {
 
     private int _player;
     [Export]
-    public int player {
-        get {
-            return _player;
-        }
-        set {
-            _player = value;
-            input?.SetMultiplayerAuthority(_player);
-        }
-    }
+    public int player { get; set; }
 
     public override void _Ready() {
         input = GetNode<PlayerInput>("PlayerInput");
