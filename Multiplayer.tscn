@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://Multiplayer.cs" id="1_4opu4"]
 
 [node name="Multiplayer" type="Node"]
+process_mode = 1
 script = ExtResource("1_4opu4")
 
 [node name="Level" type="Node" parent="."]

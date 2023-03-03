@@ -3,22 +3,20 @@ using System;
 
 public partial class PlayerInput : MultiplayerSynchronizer
 {
+	private bool _jumping = false;
+	[Export]
+	public bool jumping {get; set;}
 
+	private Vector2 _direction = Vector2.Zero;
 	[Export]
-	public bool jumping = false;
-	[Export]
-	public Vector2 direction = Vector2.Zero;
+	public Vector2 direction {get; set;}
 
 	public override void _EnterTree() {
-		if (!(GetParent<Player>().player == Multiplayer.GetUniqueId())) {
-			return;
-		}
-		SetMultiplayerAuthority(Multiplayer.GetUniqueId());
+
 	}
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
-		GD.Print("GetMultiplayerAuthority: ", GetMultiplayerAuthority());
-		GD.Print("Multiplayer.GetUniqueId(): ", Multiplayer.GetUniqueId());
+		GD.Print($"MultiplayerAuthority: {GetMultiplayerAuthority()}\n Network ID: {Multiplayer.GetUniqueId()}");
 
 
 		SetProcess(GetMultiplayerAuthority() == Multiplayer.GetUniqueId());
@@ -38,9 +36,4 @@ public partial class PlayerInput : MultiplayerSynchronizer
 		jumping = true;
 	}
 
-	// [Rpc(MultiplayerApi.RpcMode.Authority)]
-	// public void RemoteSetMultiplayerAuthority(int id) {
-	// 	SetMultiplayerAuthority(id);
-	// 	SetProcess(GetMultiplayerAuthority() == Multiplayer.GetUniqueId());
-	// }
 }

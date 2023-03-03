@@ -9,18 +9,31 @@ public partial class Player : CharacterBody3D {
 
     public PlayerInput input;
 
-    private int _player;
+    private int _player = 1;
     [Export]
-    public int player { get; set; }
+    public int player {
+        get {
+            return _player;
+        }
+        set {
+            _player = value;
+            GetNode<PlayerInput>("PlayerInput").SetMultiplayerAuthority(_player);
+        }
+    }
+
+    public override void _EnterTree()
+    {
+        input = GetNode<PlayerInput>("PlayerInput");
+    }
 
     public override void _Ready() {
-        input = GetNode<PlayerInput>("PlayerInput");
-
         GD.Print("Player._Ready, _player = ", player);
 
         if (player == Multiplayer.GetUniqueId()) {
             GetNode<Camera3D>("Camera3D").Current = true;
         }
+
+        GD.Print(input, input.jumping);
     }
 
     public override void _PhysicsProcess(double delta) {
@@ -52,5 +65,11 @@ public partial class Player : CharacterBody3D {
         Velocity = tempVelocity;
         MoveAndSlide();
     }
+
+    // public void HandoffInputAuthority(int id)
+    // {
+    //     player = id;
+    //     GetNode<PlayerInput>("PlayerInput").SetMultiplayerAuthority(id);
+    // }
 
 }

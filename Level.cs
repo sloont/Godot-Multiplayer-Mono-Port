@@ -42,18 +42,15 @@ public partial class Level : Node3D {
 
 		var playerScene = (PackedScene) ResourceLoader.Load("res://Player.tscn");
 		Player newPlayer = playerScene.Instantiate<Player>();
-
+		// newPlayer.input = newPlayer.GetNode<PlayerInput>("PlayerInput");
 		newPlayer.player = id;
+		// newPlayer.HandoffInputAuthority(id);
 
 		Vector2 position = Vector2.FromAngle(rng.Randf() * 2 * (float) Math.PI);
 
 		newPlayer.Position = new Vector3(position.X * SPAWN_RANDOM * rng.Randf(), 0, position.Y * SPAWN_RANDOM * rng.Randf());
 
 		newPlayer.Name = id.ToString();
-
-		GD.Print("SetMultiplayerAuthority", id);
-
-		newPlayer.GetNode<PlayerInput>("PlayerInput").SetMultiplayerAuthority(id);
 
 		GD.Print($"Adding {id} to scene tree");
 		GetNode<Node3D>("Players").AddChild(newPlayer, true);

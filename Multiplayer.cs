@@ -9,7 +9,7 @@ public partial class Multiplayer : Node {
 
     public override void _Ready() {
         ui = GetNode<Control>("UI");
-        GetTree().Paused = true;
+        // GetTree().Paused = true;
 
         if (DisplayServer.GetName() == "headless") {
             GD.Print("Automatically starting dedicated server.");
